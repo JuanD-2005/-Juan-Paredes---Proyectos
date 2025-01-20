@@ -1,0 +1,381 @@
+<!-------------- Juan Paredes V - 31.357.791 --------------->	
+
+<!DOCTYPE html>
+
+<html lang="es">
+
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fausto en el Laberinto por Juan Paredes</title>
+
+     <!-- Bloque A -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f0f8ff;
+        }
+
+        /* Fondo animado */
+        svg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Zona central */
+        .zona-central {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .hidden {
+            display: none;
+        }
+
+        /* Estilo de la cuadrícula */
+        .grid {
+            display: grid;
+            gap: 1px;
+            background-color: #ddd;
+            position: relative;
+            margin: auto;
+        }
+        .cell {
+            width: 50px;
+            height: 50px;
+        }
+        .wall {
+            background-color: #444;
+        }
+        .path {
+            background-color: #eee;
+        }
+
+        /* Recuadro móvil */
+        #cuadro {
+            display: none; /* Ahora será invisible al inicio */
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: absolute;
+            transition: all 0.5s linear;
+        }
+        
+        /* Resaltar la meta */
+        .meta {
+            background-color: gold; /* Cambia este color según tu preferencia */
+        }
+
+        /* Panel de coordenadas */
+        .panel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+
+        .boton-laberinto {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;  
+          
+            margin: 4px 2px;
+            cursor: pointer;  
+          
+            border-radius: 4px;
+          }
+
+          .hidden {
+            display: none;
+        }
+        
+
+        .imagen-izquierda {
+            position: absolute;
+            top: 50%;
+            left: 190px;
+            transform: translateY(-50%);
+            width: 450px;
+            height: auto;
+        }
+
+        .imagen-derecha {
+            position: absolute;
+            top: 50%;
+            left: 1250px;
+            transform: translateY(-50%);
+            width: 450px;
+            height: auto;
+        }
+
+
+        .imagen-centro {
+            position: absolute;
+            top: 5%;
+            right: 850px;
+            width: 200px;
+            height: auto;
+        }
+
+    </style>
+
+    <!-- Bloque B -->
+    <style>
+  
+        .mi-imagen {
+            width: 1900px; /* Cambia el ancho */
+            height: auto; /* Mantiene la proporción */
+            position: relative; /* Opcional, para posicionamiento específico */
+            top: -350px; /* Ajusta la posición vertical */
+            left: 20px; /* Ajusta la posición horizontal */
+        }
+        
+
+
+        /* New style for the animated title */
+        .animated-title {
+            animation: tracking-in-expand 1s ease-in-out;
+            font-size: 48px;
+            font-family: 'Roboto Condensed', sans-serif;
+            text-align: center;
+            margin-bottom: 20px;
+          }
+    
+        @-webkit-keyframes tracking-in-expand {
+          0% {
+            letter-spacing: -0.5em;
+            opacity: 0;
+          }
+          40% {
+            opacity: 0.6;
+          }
+          100% {
+            opacity: 1;
+          }
+        }
+    
+        @keyframes tracking-in-expand {
+          0% {
+            letter-spacing: -0.5em;
+            opacity: 0;
+          }
+          40% {
+            opacity: 0.6;
+          }
+          100% {
+            opacity: 1;  
+    
+          }
+        }
+    </style>
+    </head>
+
+    <body>
+            <!-- Fondo Animado -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice">
+                <defs>
+                    <linearGradient id="bg">
+                        <stop offset="0%" style="stop-color:rgba(130, 158, 249, 0.06)"></stop>
+                        <stop offset="50%" style="stop-color:rgba(76, 190, 255, 0.6)"></stop>
+                        <stop offset="100%" style="stop-color:rgba(115, 209, 72, 0.2)"></stop>
+                    </linearGradient>
+                    <path id="wave" fill="url(#bg)" d="M-363.852,502.589c0,0,236.988-41.997,505.475,0
+                    s371.981,38.998,575.971,0s293.985-39.278,505.474,5.859s493.475,48.368,716.963-4.995v560.106H-363.852V502.589z"/>
+                </defs>
+                <g>
+                    <use xlink:href='#wave' opacity=".3">
+                        <animateTransform attributeName="transform" type="translate" dur="10s" values="270 230; -334 180; 270 230" repeatCount="indefinite"/>
+                    </use>
+                    <use xlink:href='#wave' opacity=".6">
+                        <animateTransform attributeName="transform" type="translate" dur="8s" values="-270 230;243 220;-270 230" repeatCount="indefinite"/>
+                    </use>
+                    <use xlink:href='#wave' opacity=".9">
+                        <animateTransform attributeName="transform" type="translate" dur="6s" values="0 230;-140 200;0 230" repeatCount="indefinite"/>
+                    </use>
+                </g>
+            </svg>
+
+
+            <!-- Imagen a la izquierda -->
+            <img src="Imagen2.png" alt="Decoración izquierda" class="imagen-izquierda" id="imagenIzquierda">
+            <img src="Imagen3.png" alt="Decoración derecha" class="imagen-derecha" id="imagenDerecha">
+            <img src="imagen9.png" alt="Decoración central" class="imagen-centro">
+            <!-- Zona inicial -->
+            <div class="zona-central" id="inicio">
+                <h1 class="animated-title">
+                Fausto está PERDIDO!
+                </h1>
+                </div>
+                <textarea id="laberintoInput" rows="6" cols="50" placeholder="Escribe el laberinto aquí..."></textarea>
+                <br>
+                <button id="cargarLaberinto" onclick="iniciarLaberinto()" class="boton-laberinto">Cargar Laberinto</button>
+            </div>
+
+            <!-- Contenedor del laberinto -->
+            <div class="grid hidden" id="laberintoGrid"></div>
+
+            <!-- Panel de coordenadas y controles -->
+            <div class="panel hidden" id="panel">
+                <p>Coordenadas: <span id="coordenadas">(0, 0)</span></p>
+                <p>Paso: <span id="paso">0</span></p>
+                <button onclick="moverCuadro(cuadro, ruta)">Iniciar Movimiento</button>
+                <button onclick="reiniciar()">Reiniciar</button>
+            </div>
+
+            <!-- Codigo en JavaScript -->
+            <script>
+                let ruta = [];
+                let cuadro;
+
+                function iniciarLaberinto() {
+                    // Ocultar elementos iniciales
+                    document.querySelector('.animated-title').classList.add('hidden'); // Oculta el título
+                    document.getElementById('laberintoInput').classList.add('hidden'); // Oculta el área de texto
+                    document.querySelector('.boton-laberinto').classList.add('hidden'); // Oculta el botón
+                    
+                    document.querySelector('.imagen-izquierda').classList.add('hidden');
+                    document.querySelector('.imagen-derecha').classList.add('hidden');
+
+                    // Mostrar los paneles y grid
+                    document.getElementById('panel').classList.remove('hidden');
+                    document.getElementById('laberintoGrid').classList.remove('hidden');
+                
+                    // Generar el laberinto
+                    const laberintoInput = document.getElementById('laberintoInput').value.trim();
+                    const laberinto = laberintoInput.split('\n').map(line => line.split(''));
+                    const grid = document.getElementById('laberintoGrid');
+                
+                    // Configurar la cuadrícula
+                    const filas = laberinto.length;
+                    const columnas = laberinto[0].length;
+                    grid.style.gridTemplateColumns = `repeat(${columnas}, 50px)`;
+                    grid.style.gridTemplateRows = `repeat(${filas}, 50px)`;
+                
+                    // Crear las celdas
+                    laberinto.forEach((fila, i) => {
+                        fila.forEach((celda, j) => {
+                            const div = document.createElement('div');
+                            div.classList.add('cell');
+                            if (celda === '#') {
+                                div.classList.add('wall');
+                            } else if (celda === 'o') {
+                                div.classList.add('path', 'meta'); // Meta resaltada
+                            } else {
+                                div.classList.add('path');
+                            }
+                            grid.appendChild(div);
+                        });
+                    });
+                
+                    // Generar ruta
+                    ruta = resolverLaberinto(laberinto);
+                
+                    // Crear el cuadro rojo
+                    cuadro = document.createElement('div');
+                    cuadro.id = 'cuadro';
+                    grid.appendChild(cuadro);
+                
+                    // Mostrar coordenadas iniciales
+                    actualizarPanel(ruta[0], 0);
+                }
+                
+                function resolverLaberinto(laberinto) {
+                    const filas = laberinto.length;
+                    const columnas = laberinto[0].length;
+                    const direcciones = [[-1, 0], [1, 0], [0, 1], [0, -1]];
+                    let inicio, salida;
+
+                    laberinto.forEach((fila, i) => {
+                        fila.forEach((celda, j) => {
+                            if (celda === '*') inicio = [i, j];
+                            if (celda === 'o') salida = [i, j];
+                        });
+                    });
+
+
+
+                    if (!inicio || !salida) throw new Error('No se encontró inicio o salida.');
+                    const cola = [[...inicio, []]];
+                    const visitados = new Set();
+                    visitados.add(`${inicio[0]}-${inicio[1]}`);
+
+                    while (cola.length > 0) {
+                        const [fila, columna, ruta] = cola.shift();
+                        if (fila === salida[0] && columna === salida[1]) return ruta;
+
+                        for (const [df, dc] of direcciones) {
+                            const nf = fila + df, nc = columna + dc;
+                            if (
+                                nf >= 0 && nf < filas &&
+                                nc >= 0 && nc < columnas &&
+                                laberinto[nf][nc] !== '#' &&
+                                !visitados.has(`${nf}-${nc}`)
+                            ) {
+                                visitados.add(`${nf}-${nc}`);
+                                cola.push([nf, nc, [...ruta, [nf, nc]]]);
+                            }
+                        }
+                    }
+                    throw new Error('No hay ruta disponible.');
+
+
+
+                    try {
+                        ruta = resolverLaberinto(laberinto);
+                        actualizarPanel(ruta[0], 0);
+                    } catch (error) {
+                        alert(error.message); // Mostrar mensaje si no hay ruta
+                        document.getElementById('panel').classList.add('hidden');
+                        document.getElementById('inicio').classList.remove('hidden');
+                        document.getElementById('laberintoGrid').classList.add('hidden');
+                    }
+                    
+
+
+                }
+
+                function moverCuadro(cuadro, ruta) {
+                    cuadro.style.display = 'block'; 
+
+                    ruta.forEach(([fila, columna], i) => {
+                        setTimeout(() => {
+                            cuadro.style.transform = `translate(${columna * 50}px, ${fila * 50}px)`;
+                            actualizarPanel([fila, columna], i + 1);
+                        }, i * 500);
+                        
+                    });
+                }
+                
+                function actualizarPanel([fila, columna], paso) {
+                    document.getElementById('coordenadas').innerText = `(${fila}, ${columna})`;
+                    document.getElementById('paso').innerText = paso;
+                }
+
+                function reiniciar() {
+                    location.reload();
+                }
+
+            </script>
+    </body>
+</html>

@@ -1,0 +1,2 @@
+El jugador 1 ha acertado 1 preguntas en un tiempo de 6  segundos
+El jugador 1 ha acertado 0 preguntas en un tiempo de 4  segundos

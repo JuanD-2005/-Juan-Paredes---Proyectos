@@ -1,0 +1,10 @@
+5
+gato
+ganso
+casa
+caja
+lomida
+3
+ga
+ca
+c

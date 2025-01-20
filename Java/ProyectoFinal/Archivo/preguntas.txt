@@ -1,0 +1,6 @@
+¿Quién compuso la 5ª Sinfonía?,Mozart,Beethoven,Bach,Tchaikovsky,2
+¿Cuál es el océano más grande?,Atlántico,Índico,Ártico,Pacífico,4
+¿Cuál es el elemento químico con el símbolo “H”?,Hidrógeno,Helio,Hierro,Hafnio,1
+¿Cuál es el planeta más grande del sistema solar?,Marte,Júpiter,Saturno,Neptuno,2
+¿Cuál es la capital de Francia?,Paris,Londres,Berlín,Madrid,1
+¿Cuál es el río más largo del mundo?,Nilo,Amazonas,Yangtsé,Misisipi,2

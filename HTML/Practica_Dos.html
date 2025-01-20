@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radar Sputnik - Juan Paredes </title>
+
+    <!-- Bloque A -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f0f8ff;
+            position: relative;
+        }
+
+        /* Fondo animado */
+        svg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .zona-central {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+    
+        .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centra horizontalmente */
+        justify-content: center; /* Centra verticalmente si es necesario */
+        gap: 20px;
+    }
+
+        /* Panel de coordenadas */
+        .coordinates {
+            max-height: 300px;
+            overflow-y: auto;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            text-align: center; /* Centra el texto dentro */
+        }
+
+        /* Botón de reinicio */
+        #reiniciar {
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-align: center; /* Centra el texto del botón */
+        }
+
+        #reiniciar:hover {
+            background-color: #ff3b2f;
+        }
+
+
+        /* Estilo de la cuadrícula */
+        .grid {
+            display: grid;
+            gap: 1px;
+            background-color: #ddd;
+        }
+
+        .cell {
+            width: 50px;
+            height: 50px;
+            background-color: #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .star {
+            width: 30px;
+            height: 30px;
+            background-color: gold;
+            clip-path: polygon(
+                50% 0%, 
+                61% 35%, 
+                98% 35%, 
+                68% 57%, 
+                79% 91%, 
+                50% 70%, 
+                21% 91%, 
+                32% 57%, 
+                2% 35%, 
+                39% 35%
+            );
+            animation: spin 2s linear infinite;
+            position: absolute;
+        }
+        
+
+        /* Animación circular */
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Título animado */
+        .animated-title {
+            animation: tracking-in-expand 1s ease-in-out;
+            font-size: 48px;
+            font-family: 'Roboto Condensed', sans-serif;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        @keyframes tracking-in-expand {
+            0% {
+                letter-spacing: -0.5em;
+                opacity: 0;
+            }
+            40% {
+                opacity: 0.6;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Imágenes a los lados */
+        .imagen-izquierda {
+            position: absolute;
+            top: 50%;
+            left: 50px;
+            transform: translateY(-50%);
+            width: 450px;
+            height: auto;
+        }
+
+        .imagen-derecha {
+            position: absolute;
+            top: 50%;
+            right: 50px;
+            transform: translateY(-50%);
+            width: 450px;
+            height: auto;
+        }
+
+        .imagen-centro {
+            position: absolute;
+            top: 5%;
+            right: 893px;
+            width: 120px;
+            height: auto;
+        }
+
+
+        /* Panel de coordenadas */
+        .coordinates {
+            max-height: 300px;
+            overflow-y: auto;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 200px;
+        }
+
+
+
+        .boton-laberinto {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+
+        /* Botones */
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Botón de reinicio */
+        #reiniciar {
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        #reiniciar:hover {
+            background-color: #ff3b2f;
+        }
+    </style>
+
+</head>
+
+<body>
+
+        <!-- Fondo Animado -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice">
+            <defs>
+                <linearGradient id="bg">
+                    <stop offset="0%" style="stop-color:rgba(130, 158, 249, 0.06)"></stop>
+                    <stop offset="50%" style="stop-color:rgba(76, 190, 255, 0.6)"></stop>
+                    <stop offset="100%" style="stop-color:rgba(115, 209, 72, 0.2)"></stop>
+                </linearGradient>
+                <path id="wave" fill="url(#bg)" d="M-363.852,502.589c0,0,236.988-41.997,505.475,0
+                s371.981,38.998,575.971,0s293.985-39.278,505.474,5.859s493.475,48.368,716.963-4.995v560.106H-363.852V502.589z"/>
+            </defs>
+            <g>
+                <use xlink:href='#wave' opacity=".3">
+                    <animateTransform attributeName="transform" type="translate" dur="10s" values="270 230; -334 180; 270 230" repeatCount="indefinite"/>
+                </use>
+                <use xlink:href='#wave' opacity=".6">
+                    <animateTransform attributeName="transform" type="translate" dur="8s" values="-270 230;243 220;-270 230" repeatCount="indefinite"/>
+                </use>
+                <use xlink:href='#wave' opacity=".9">
+                    <animateTransform attributeName="transform" type="translate" dur="6s" values="0 230;-140 200;0 230" repeatCount="indefinite"/>
+                </use>
+            </g>
+        </svg>
+
+        <!-- Imágenes a los lados -->
+        <img src="imagen0.png" alt="Decoración izquierda" class="imagen-izquierda">
+        <img src="imagen1.png" alt="Decoración derecha" class="imagen-derecha">
+        <img src="imagen9.png" alt="Decoración central" class="imagen-centro">
+        <!-- Zona inicial -->
+        <div class="zona-central" id="inicio">
+            <h1 class="animated-title">¡Bienvenido al Mapa Estelar!</h1>
+            <textarea id="entrada" rows="8" cols="50" placeholder="Introduce la matriz aquí..."></textarea>
+            <br>
+            <input type="file" id="archivo" accept=".txt" />
+            <button class="boton-laberinto" onclick="leerArchivo()">Cargar Archivo</button>
+            <button class="boton-laberinto" onclick="generarGrid()">Generar Grid</button>
+        </div>
+        
+        
+
+        <!-- Contenedor del Grid -->
+        <div class="container hidden" id="container">
+            <div class="grid" id="grid"></div>
+            <div class="coordinates" id="coordinates"></div>
+        </div>
+
+        <!-- Codigo en JavaScript -->
+        <script>
+
+            function leerArchivo() {
+                const archivoInput = document.getElementById('archivo');
+                const archivo = archivoInput.files[0];
+            
+                if (!archivo) {
+                    alert('Por favor, selecciona un archivo.');
+                    return;
+                }
+            
+                const lector = new FileReader();
+                lector.onload = function (evento) {
+                    const contenido = evento.target.result;
+                    document.getElementById('entrada').value = contenido.trim();
+                };
+            
+                lector.readAsText(archivo);
+            }
+        
+            function generarGrid() {
+                const grid = document.getElementById('grid');
+                const coordinates = document.getElementById('coordinates');
+                const container = document.getElementById('container');
+
+                // Limpiar la cuadrícula y las coordenadas
+                grid.innerHTML = '';
+                coordinates.innerHTML = '';
+
+                // Ocultar zona inicial
+                document.getElementById('inicio').classList.add('hidden');
+                
+                container.classList.remove('hidden');
+
+                // Obtener la entrada del usuario
+                const input = document.getElementById('entrada').value.trim().split('\n');
+                const [filas, columnas] = input[0].split(' ').map(Number);
+                const matriz = input.slice(1).map(line => line.split(' ').map(Number));
+
+                // Configurar la cuadrícula
+                grid.style.gridTemplateColumns = `repeat(${columnas}, 50px)`;
+                grid.style.gridTemplateRows = `repeat(${filas}, 50px)`;
+
+                // Función para detectar estrellas
+                const obtenerSumaCircundantes = (i, j) => {
+                    let suma = 0;
+                    for (let di = -1; di <= 1; di++) {
+                        for (let dj = -1; dj <= 1; dj++) {
+                            const ni = i + di, nj = j + dj;
+                            if (ni >= 0 && ni < filas && nj >= 0 && nj < columnas && !(di === 0 && dj === 0)) {
+                                suma += matriz[ni][nj];
+                            }
+                        }
+                    }
+                    return suma;
+                };
+
+                // Generar celdas y detectar estrellas
+                for (let i = 0; i < filas; i++) {
+                    for (let j = 0; j < columnas; j++) {
+                        const cell = document.createElement('div');
+                        cell.classList.add('cell');
+                        grid.appendChild(cell);
+
+                        const sumaCircundantes = obtenerSumaCircundantes(i, j);
+                        const promedio = (matriz[i][j] + sumaCircundantes) / 5;
+                        if (promedio > 10.0) {
+                            const star = document.createElement('div');
+                            star.classList.add('star');
+                            cell.appendChild(star);
+                            coordinates.innerHTML += `(${i}, ${j})<br>`;
+                        }
+                    }
+                }
+
+                // Añadir botón de reinicio
+                const reiniciarBtn = document.createElement('button');
+                reiniciarBtn.id = 'reiniciar';
+                reiniciarBtn.textContent = 'Reiniciar';
+                reiniciarBtn.onclick = () => location.reload();
+                container.appendChild(reiniciarBtn);
+            }
+        </script>
+
+
+</body>
+</html>

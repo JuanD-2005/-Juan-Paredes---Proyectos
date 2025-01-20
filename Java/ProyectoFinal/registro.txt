@@ -1,0 +1,3 @@
+El jugador 1 ha acertado 7 en un tiempo de 35
+El jugador 2 ha acertado 5 en un tiempo de 53
+El jugador 1 ha acertado 5 en un tiempo de 14
