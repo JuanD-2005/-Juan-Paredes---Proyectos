@@ -10,7 +10,7 @@
 
 using namespace std; // Agregado
 
-const int MAX = 100; // Un n˙mero m·ximo de vÈrtices
+const int MAX = 100; // Un n√∫mero m√°ximo de v√©rtices
 const int INF = numeric_limits<int>::max();
 
 class Grafo {
@@ -49,7 +49,7 @@ public:
     matrizAdyacencia = copiaMatriz; // Actualizar la matriz original con la copia modificada
   }
 
-  // MÈtodo para verificar si es fuertemente conexo
+  // M√©todo para verificar si es fuertemente conexo
   bool esFuertementeConexo() {
     warshall();
     for (int i = 0; i < numVertices; ++i) {
@@ -62,7 +62,7 @@ public:
     return true;
   }
 
-// MÈtodo para identificar nodos fuente y pozos
+// M√©todo para identificar nodos fuente y pozos
  void identificarNodosFuenteYPozo() {
    // Letras de las aristas
     for (int i = 0; i < numVertices; ++i) {
@@ -84,7 +84,7 @@ public:
     }
 }
 
-// MÈtodo para eliminar un nodo
+// M√©todo para eliminar un nodo
 void eliminarNodo(char nodoID) {
     int idx = toupper(nodoID) - 'A';
     matrizAdyacencia.erase(matrizAdyacencia.begin() + idx); // Eliminar fila
@@ -105,7 +105,7 @@ void eliminarNodo(char nodoID) {
     cout << "\t\tNodo Eliminado" << endl;
 }
 
-// MÈtodo para imprimir el grafo
+// M√©todo para imprimir el grafo
 void imprimirGrafo() {
     cout << "\n";
  // Letras de las aristas
@@ -169,7 +169,7 @@ void imprimirGrafo() {
   
   
 if (distancias[idxDestino] == INF) {
-        cout << "\t\tNo hay una ruta v·lida desde " << origen << " hasta " << destino << endl;
+        cout << "\t\tNo hay una ruta v√°lida desde " << origen << " hasta " << destino << endl;
     } else {
         cout << "\t\tLa ruta minima desde " << origen << " hasta " << destino
              << " tiene un peso de " << distancias[idxDestino] << endl;
@@ -188,7 +188,7 @@ int leerArchivoYCrearGrafo(Grafo& grafo, const string& nombreArchivo) {
   }
 
   int numVertices;
-  archivo >> numVertices; // Leer el n˙mero de vÈrtices
+  archivo >> numVertices; // Leer el n√∫mero de v√©rtices
   cout << "\t\t\t\tNumero de vertices: " << numVertices << endl;
 
   Grafo nuevoGrafo(numVertices);
@@ -204,16 +204,16 @@ char origen, destino, flecha1, flecha2;
 
 
 if (!(ss >> origen >> flecha1 >> flecha2 >> destino >> peso)) {
-      cerr << "\t\tError al leer la lÌnea: " << linea << endl;
+      cerr << "\t\tError al leer la l√≠nea: " << linea << endl;
       continue; 
     }
 
     if (flecha1 != '-' || flecha2 != '>') {
-      cerr << "\t\t\t\tFormato de lÌnea incorrecto: " << linea << endl;
+      cerr << "\t\t\t\tFormato de l√≠nea incorrecto: " << linea << endl;
       continue; // El formato de la flecha no es correcto
     }
 
-    // Convertir a may˙scula por si acaso
+    // Convertir a may√∫scula por si acaso
     origen = toupper(origen);
     destino = toupper(destino);
 
@@ -239,7 +239,7 @@ int main() {
     std::cout << "\t\t     |  /--------------------\\  |   d88P  Y88b                  d88P\"                          " << std::endl; usleep(150000);
     std::cout << "\t\t     | |                      | |   888    888                  888                            " << std::endl; usleep(150000);
     std::cout << "\t\t     | |   Juan Paredes       | |   888        888d888  8888b.  888888  .d88b.  .d8888b        " << std::endl; usleep(150000);
-    std::cout << "\t\t     | |   Jose Bravo         | |   888  88888 888P\"       \"88b 888     d88""88b  88K            " << std::endl; usleep(150000);
+    std::cout << "\t\t     | |                      | |   888  88888 888P\"       \"88b 888     d88""88b  88K            " << std::endl; usleep(150000);
     std::cout << "\t\t     | |  Estructura de Datos | |   888    888 888     .d888888 888    888  888 \"Y8888b.       " << std::endl; usleep(150000);
     std::cout << "\t\t     |  \\____________________/  |   Y88b  d88P 888     888  888 888    Y88..88P      X88       " << std::endl; usleep(150000);
     std::cout << "\t\t     |__________________________| \   \"Y8888P88 888     \"Y888888 888     \"Y88P\"   88888P'       " << std::endl; usleep(150000);
