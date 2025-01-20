@@ -1,8 +1,8 @@
 /*
- * Autores: Juan Paredes y Jose Bravo
+ * Autores: Juan Paredes 
  * Fecha: 8 de Junio del 2024
- * DescripciÛn: Este programa lee un archivo de texto con datos de ·rboles binarios de b˙squeda (ABB),
- * crea un ABB para cada lÌnea del archivo, e imprime informaciÛn sobre cada ·rbol.
+ * Descripci√≥n: Este programa lee un archivo de texto con datos de √°rboles binarios de b√∫squeda (ABB),
+ * crea un ABB para cada l√≠nea del archivo, e imprime informaci√≥n sobre cada √°rbol.
  */
 
 #include <iostream>
@@ -14,7 +14,7 @@
 
 using namespace std;
 
-// Estructura para los nodos del ·rbol
+// Estructura para los nodos del √°rbol
 struct Node{
   string data; // Dato del nodo
   Node *hi; // Hijo izquierdo
@@ -26,24 +26,24 @@ struct Node{
 
 
 /*
- * Clase Arbol: Esta clase representa un ·rbol binario de b˙squeda (ABB).
- * Cada instancia de Arbol tiene una raÌz que es un puntero a un Node.
+ * Clase Arbol: Esta clase representa un √°rbol binario de b√∫squeda (ABB).
+ * Cada instancia de Arbol tiene una ra√≠z que es un puntero a un Node.
  */
 class Arbol{
 	
   private:
-    Node *rot; // RaÌz del ·rbol. Es un puntero a la raÌz del ABB.
+    Node *rot; // Ra√≠z del √°rbol. Es un puntero a la ra√≠z del ABB.
     
   public:
   	
   	
     /*
-     * Constructor de la clase Arbol: Inicializa la raÌz del ·rbol como NULL.
+     * Constructor de la clase Arbol: Inicializa la ra√≠z del √°rbol como NULL.
      */
-    Arbol() : rot(NULL) {} // InicializaciÛn de rot en el constructor de la clase Arbol
+    Arbol() : rot(NULL) {} // Inicializaci√≥n de rot en el constructor de la clase Arbol
     
     /*
-     * FunciÛn insertar: Inserta un nuevo nodo en el ABB.
+     * Funci√≥n insertar: Inserta un nuevo nodo en el ABB.
      * data: El dato a insertar en el ABB.
      */
     void insertar(string data){
@@ -55,7 +55,7 @@ class Arbol{
     }
     
     /*
-     * FunciÛn insertar: Inserta un nuevo nodo en el ABB.
+     * Funci√≥n insertar: Inserta un nuevo nodo en el ABB.
      * data: El dato a insertar en el ABB.
      * node: El nodo actual en el ABB.
      */
@@ -76,7 +76,7 @@ class Arbol{
     }
     
     /*
-     * FunciÛn imprimirPostOrden: Imprime los nodos del ABB en postorden.
+     * Funci√≥n imprimirPostOrden: Imprime los nodos del ABB en postorden.
      */
     void imprimirPostOrden(){
       imprimirPostOrden(rot);
@@ -84,7 +84,7 @@ class Arbol{
     }
     
     /*
-     * FunciÛn imprimirPostOrden: Imprime los nodos del ABB en postorden.
+     * Funci√≥n imprimirPostOrden: Imprime los nodos del ABB en postorden.
      * node: El nodo actual en el ABB.
      */
     void imprimirPostOrden(Node *node){
@@ -98,14 +98,14 @@ class Arbol{
     }
     
     /*
-     * FunciÛn altura: Devuelve la altura del ABB.
+     * Funci√≥n altura: Devuelve la altura del ABB.
      */
     int altura() {
         return altura(rot);
     }
     
     /*
-     * FunciÛn altura: Devuelve la altura del ABB.
+     * Funci√≥n altura: Devuelve la altura del ABB.
      * node: El nodo actual en el ABB.
      */
     int altura(Node* node) {
@@ -117,22 +117,22 @@ class Arbol{
     }
     
     /*
-     * FunciÛn max: Devuelve el m·ximo de dos n˙meros.
-     * a, b: Los dos n˙meros a comparar.
+     * Funci√≥n max: Devuelve el m√°ximo de dos n√∫meros.
+     * a, b: Los dos n√∫meros a comparar.
      */
     int max(int a, int b) {
         return (a > b) ? a : b;
     }
     
     /*
-     * FunciÛn contarHojas: Devuelve la cantidad de nodos hoja en el ABB.
+     * Funci√≥n contarHojas: Devuelve la cantidad de nodos hoja en el ABB.
      */
     int contarHojas(){
       return contarHojas(rot);
     }
     
     /*
-     * FunciÛn contarHojas: Devuelve la cantidad de nodos hoja en el ABB.
+     * Funci√≥n contarHojas: Devuelve la cantidad de nodos hoja en el ABB.
      * node: El nodo actual en el ABB.
      */
     int contarHojas(Node* node) {
@@ -146,14 +146,14 @@ class Arbol{
     }
     
     /*
-     * FunciÛn estaEquilibrado: Devuelve true si el ABB est· equilibrado, false en caso contrario.
+     * Funci√≥n estaEquilibrado: Devuelve true si el ABB est√° equilibrado, false en caso contrario.
      */
     bool estaEquilibrado() {
         return estaEquilibrado(rot);
     }
     
     /*
-     * FunciÛn estaEquilibrado: Devuelve true si el ABB est· equilibrado, false en caso contrario.
+     * Funci√≥n estaEquilibrado: Devuelve true si el ABB est√° equilibrado, false en caso contrario.
      * node: El nodo actual en el ABB.
      */
     bool estaEquilibrado(Node* node) {
@@ -167,7 +167,7 @@ class Arbol{
     }
     
     /*
-     * FunciÛn imprimirEnOrdenInverso: Imprime los nodos del ABB en orden inverso.
+     * Funci√≥n imprimirEnOrdenInverso: Imprime los nodos del ABB en orden inverso.
      */
     void imprimirEnOrdenInverso(){
       imprimirEnOrdenInverso(rot, 0);
@@ -175,7 +175,7 @@ class Arbol{
     }
 
     /*
-     * FunciÛn imprimirEnOrdenInverso: Imprime los nodos del ABB.
+     * Funci√≥n imprimirEnOrdenInverso: Imprime los nodos del ABB.
      * node: El nodo actual en el ABB.
      * profundidad: La profundidad actual en el ABB.
      */
@@ -268,7 +268,7 @@ int main(){
 			  
 		    
 		    datas.clear(); 
-		    cin.get(); // Presiona cualquier tecla para continuar con el siguiente ·rbol
+		    cin.get(); // Presiona cualquier tecla para continuar con el siguiente √°rbol
 		    cout<<endl;
 	
 		  }
