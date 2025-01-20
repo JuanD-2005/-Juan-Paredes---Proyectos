@@ -31,7 +31,7 @@ class Producto {
 		vector<string> descripcion;
 		vector<int> stock_min;
 	public:	
-		// Imprimir la informaciÛn de todos los productos
+		// Imprimir la informaci√≥n de todos los productos
 		void imprimir() {
 			// Lectura del archivo (modificar para binario si es necesario)
 			ifstream arc("produc.dat", ios::binary);
@@ -145,7 +145,7 @@ class Cliente {
 			}
 		}
 	
-		// Imprimir la informaciÛn de todos los clientes
+		// Imprimir la informaci√≥n de todos los clientes
 		void imprimir() {
 			// Lectura del archivo (modificar para binario si es necesario)
 			ifstream arc("clien.dat", ios::binary);
@@ -283,7 +283,7 @@ class Cliente {
 			telefono.clear();
 		}
 	
-		// **MÈtodos adicionales:**
+		// **M√©todos adicionales:**
 	
 		// Eliminar un espacio determinado de todos los vectores
 		void eliminarEspacio() {
@@ -339,7 +339,7 @@ class Cliente {
 			if (indice >= 0 && indice < vector.size()) {
 				vector[indice] = valor;
 			} else {
-				cout << "Õndice fuera de rango." << endl;
+				cout << "√çndice fuera de rango." << endl;
 			}
 		}
 	
@@ -347,7 +347,7 @@ class Cliente {
 			if (indice >= 0 && indice < vector.size()) {
 				vector[indice] = valor;
 			} else {
-				cout << "Õndice fuera de rango." << endl;
+				cout << "√çndice fuera de rango." << endl;
 			}
 		}
 };
@@ -357,7 +357,7 @@ class Orden_Quicksorts{
 	
 	public:	
 	
-	// FunciÛn para intercambiar los elementos de los vectores
+	// Funci√≥n para intercambiar los elementos de los vectores
 			void swaps(vector<string>& names, vector<int>& v1, vector<int>& v2, vector<int>& v3, vector<int>& v4, vector<float>& v5, int i, int j) {
     			swap(names[i], names[j]);
     			swap(v1[i], v1[j]);
@@ -367,7 +367,7 @@ class Orden_Quicksorts{
 			    swap(v5[i], v5[j]);
 			}
 
-	// FunciÛn de particiÛn del QuickSort
+	// Funci√≥n de partici√≥n del QuickSort
 			int partition(vector<string>& names, vector<int>& v1, vector<int>& v2, vector<int>& v3, vector<int>& v4, vector<float>& v5, int low, int high) {
 			    string pivot = names[high];
 			    int i = (low - 1);
@@ -382,7 +382,7 @@ class Orden_Quicksorts{
 			    return (i + 1);
 			}
 			
-	// FunciÛn de QuickSort
+	// Funci√≥n de QuickSort
 			void quickSort(vector<string>& names, vector<int>& v1, vector<int>& v2, vector<int>& v3, vector<int>& v4, vector<float>& v5, int low, int high) {
 			    if (low < high) {
 			        int pi = partition(names, v1, v2, v3, v4, v5, low, high);
@@ -392,7 +392,7 @@ class Orden_Quicksorts{
 			    }
 			}
 			
-	// FunciÛn para ordenar los vectores
+	// Funci√≥n para ordenar los vectores
 			void sortVectors(vector<string>& names, vector<int>& v1, vector<int>& v2, vector<int>& v3, vector<int>& v4, vector<float>& v5) {
 			    quickSort(names, v1, v2, v3, v4, v5, 0, names.size() - 1);
 			}
@@ -406,14 +406,14 @@ public:
     int codigo;
     string nombre;
 
-    // MÈtodo para leer un registro del archivo
+    // M√©todo para leer un registro del archivo
     void leerRegistro(ifstream& archivo) {
         archivo >> codigo;
         archivo.ignore();
         getline(archivo, nombre);
     }
 
-    // MÈtodo para escribir un registro en el archivo
+    // M√©todo para escribir un registro en el archivo
     void escribirRegistro(ofstream& archivo) const {
         archivo << codigo << " " << nombre << endl;
     }
@@ -498,12 +498,12 @@ public:
     bool hayCambioDeSecuencia = false;
 
     while (getline(dis, actual)) {
-        // Si la lÌnea es vacÌa, contin˙a con la siguiente iteraciÛn
+        // Si la l√≠nea es vac√≠a, contin√∫a con la siguiente iteraci√≥n
         if (actual.empty()) {
             continue;
         }
 
-        if (!anterior.empty() && anterior >= actual) {  // Cambia aquÌ
+        if (!anterior.empty() && anterior >= actual) {  // Cambia aqu√≠
             indexOutputStream = indexOutputStream == 0 ? 1 : 0;
             hayCambioDeSecuencia = true;
         }
@@ -767,7 +767,7 @@ void merge(const string& NomArch, int l, int mit, int r) {
     
     archivoEntrada.open(NomArch.c_str());
     
-    // Fase de fusiÛn auxiliar
+    // Fase de fusi√≥n auxiliar
     RegistroDirecto registroLR, registroEnt;
     int A = 0, f = 0;
     while (archivoEntrada.good() && AuxLRi.good()) {
@@ -789,7 +789,7 @@ void merge(const string& NomArch, int l, int mit, int r) {
     AuxLRi.close();
 	archivoEntrada.close();
 	
-    // Fase de fusiÛn final
+    // Fase de fusi√≥n final
     ofstream archivoEntradaOut(NomArch.c_str(), ios::trunc);
     if (!archivoEntradaOut.is_open()) {
         cerr << "Error al abrir el archivo de entrada: " << NomArch << endl;
@@ -852,7 +852,7 @@ int main() {
   	
   	   	try {
   	   		         system("cls");
-   	cout << "               Juan Paredes - Jose Bravo             \n";
+   	cout << "                     Juan Paredes                    \n";
         cout << "                       _______                       \n";
         cout << "                      /      /\\                     \n";
         cout << "    ------------     /______/  \\     ------------  \n";
